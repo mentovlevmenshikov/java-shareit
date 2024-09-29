@@ -12,14 +12,6 @@ public class UserMapper {
         return new UserDto(user.getId(), user.getName(), user.getEmail());
     }
 
-    public User toUserFromUserDto(UserDto userDto) {
-        return User.builder()
-                .id(userDto.getId())
-                .name(userDto.getName())
-                .email(userDto.getEmail())
-                .build();
-    }
-
     public User toUserFromUserCreateDto(UserCreateDto userCreateDto) {
         return User.builder()
                 .id(userCreateDto.getId())
