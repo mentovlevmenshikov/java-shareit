@@ -11,48 +11,44 @@ import ru.practicum.shareit.logging.Logging;
 
 import java.util.List;
 
+@Logging
 @RestController
 @RequestMapping("/items")
 @RequiredArgsConstructor
 public class ItemController {
     private final ItemService itemService;
+    private static final String HEADER4USER_ID = "X-Sharer-User-Id";
 
-    @Logging
     @GetMapping
-    public List<ItemDto> getUserItems(@RequestHeader("X-Sharer-User-Id") long userId) {
+    public List<ItemDto> getUserItems(@RequestHeader(HEADER4USER_ID) long userId) {
         return itemService.getAll4Owner(userId);
     }
 
-    @Logging
     @GetMapping("/{id}")
     public ItemDto getItemById(@PathVariable long id) {
         return itemService.getById(id);
     }
 
-    @Logging
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ItemDto createItem(@RequestHeader("X-Sharer-User-Id") long ownerId, @RequestBody @Valid ItemCreateDto item) {
+    public ItemDto createItem(@RequestHeader(HEADER4USER_ID) long ownerId, @RequestBody @Valid ItemCreateDto item) {
         item.setOwnerId(ownerId);
         return  itemService.createItem(item);
     }
 
-    @Logging
     @PatchMapping("/{itemId}")
     public ItemDto updateItem(@PathVariable long itemId, @RequestBody @Valid ItemUpdateDto itemUpdateDto,
-                              @RequestHeader("X-Sharer-User-Id") Long ownerId) {
+                              @RequestHeader(HEADER4USER_ID) Long ownerId) {
         itemUpdateDto.setId(itemId);
         itemUpdateDto.setOwnerId(ownerId);
         return itemService.updateItem(itemUpdateDto);
     }
 
-    @Logging
     @DeleteMapping("/{id}")
     public void deleteItem(@PathVariable long id) {
         itemService.deleteItem(id);
     }
 
-    @Logging
     @GetMapping("/search")
     public List<ItemDto> searchItems(@RequestParam String text) {
        return itemService.searchItems(text);

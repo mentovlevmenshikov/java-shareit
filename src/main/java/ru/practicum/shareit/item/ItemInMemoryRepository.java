@@ -52,9 +52,10 @@ public class ItemInMemoryRepository implements ItemRepository {
 
     @Override
     public List<Item> search(String text) {
+        String textLowerCase = text.toLowerCase();
         return items.values().stream()
-                .filter(item -> (item.getDescription().toLowerCase().contains(text.toLowerCase())
-                        || item.getName().toLowerCase().contains(text.toLowerCase()))
+                .filter(item -> (item.getDescription().toLowerCase().contains(textLowerCase)
+                        || item.getName().toLowerCase().contains(textLowerCase))
                         && item.isAvailable())
                 .toList();
     }

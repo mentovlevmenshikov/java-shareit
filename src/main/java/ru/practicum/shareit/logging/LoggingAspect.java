@@ -15,18 +15,22 @@ import java.util.Arrays;
 @Component
 public class LoggingAspect {
 
-    @Pointcut("@annotation(ru.practicum.shareit.logging.Logging)")
+    /*@Pointcut("@annotation(ru.practicum.shareit.logging.Logging)")
     private void methodsInRestController() {
+    }*/
+
+    @Pointcut("@within(ru.practicum.shareit.logging.Logging) && execution(public * *(..))")
+    private void allMethodsInClass() {
     }
 
-    @Before(value = "methodsInRestController()")
+    @Before(value = "allMethodsInClass()")
     public void logBefore(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         String methodName = joinPoint.getSignature().getName();
         log.info("==> {}() - {}", methodName, Arrays.toString(args));
     }
 
-    @AfterReturning(value = "methodsInRestController()", returning = "result")
+    @AfterReturning(value = "allMethodsInClass()", returning = "result")
     public void logAfter(JoinPoint joinPoint, Object result) {
         String methodName = joinPoint.getSignature().getName();
         log.info("<== {}() - {}", methodName, result);
