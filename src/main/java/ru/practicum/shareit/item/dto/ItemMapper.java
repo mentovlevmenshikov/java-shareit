@@ -1,7 +1,10 @@
 package ru.practicum.shareit.item.dto;
 
 import org.springframework.stereotype.Component;
+import ru.practicum.shareit.booking.dto.BookingDto;
+import ru.practicum.shareit.item.comment.dto.CommentFullDto;
 import ru.practicum.shareit.item.model.Item;
+import ru.practicum.shareit.user.User;
 
 import java.util.List;
 
@@ -13,17 +16,17 @@ public class ItemMapper {
                 .name(item.getName())
                 .description(item.getDescription())
                 .available(item.isAvailable())
-                .ownerId(item.getOwnerId())
+                .ownerId(item.getOwner().getId())
                 .requestId(item.getRequestId())
                 .build();
     }
 
-    public Item fromItemCreateDto(ItemCreateDto itemCreateDto) {
+    public Item fromItemCreateDto(ItemCreateDto itemCreateDto, User owner) {
         return Item.builder()
                 .name(itemCreateDto.getName())
                 .description(itemCreateDto.getDescription())
                 .available(itemCreateDto.getAvailable())
-                .ownerId(itemCreateDto.getOwnerId())
+                .owner(owner)
                 .build();
     }
 
@@ -31,5 +34,19 @@ public class ItemMapper {
         return items.stream()
                 .map(this::toItemDto)
                 .toList();
+    }
+
+    public ItemWithBookingDto toItemWithBookingDto(Item item, BookingDto lastBooking, BookingDto nextBooking,
+                                                   List<CommentFullDto> comments) {
+        return ItemWithBookingDto.builder()
+                .id(item.getId())
+                .name(item.getName())
+                .description(item.getDescription())
+                .available(item.isAvailable())
+                .owner(item.getOwner())
+                .lastBooking(lastBooking)
+                .nextBooking(nextBooking)
+                .comments(comments)
+                .build();
     }
 }
