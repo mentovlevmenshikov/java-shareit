@@ -25,8 +25,7 @@ public class BookingController {
     public BookingDto createBooking(@RequestHeader(HEADER4USER_ID) long bookerId,
                                     @RequestBody @Valid BookingCreateDto booking) {
         booking.setBookerId(bookerId);
-        BookingDto bookingDto = bookingService.createBooking(booking);
-        return bookingDto;
+        return bookingService.createBooking(booking);
     }
 
     @PatchMapping("/{bookingId}")
