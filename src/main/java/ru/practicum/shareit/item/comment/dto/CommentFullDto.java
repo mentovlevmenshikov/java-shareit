@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import ru.practicum.shareit.item.model.Item;
-import ru.practicum.shareit.user.User;
+import ru.practicum.shareit.user.dto.UserDto;
 
 import java.time.LocalDateTime;
 
@@ -17,7 +17,7 @@ public class CommentFullDto {
     private Long id;
     private String text;
     private Item item;
-    private User author;
+    private UserDto author;
     private String authorName;
     private LocalDateTime created;
 }

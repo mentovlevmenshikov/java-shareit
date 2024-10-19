@@ -2,6 +2,7 @@ package ru.practicum.shareit.item.comment;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.user.User;
 
@@ -27,5 +28,6 @@ public class Comment {
     @ManyToOne(fetch = FetchType.LAZY)
     private User author;
     @Column(nullable = false)
+    @CreationTimestamp
     private LocalDateTime created;
 }

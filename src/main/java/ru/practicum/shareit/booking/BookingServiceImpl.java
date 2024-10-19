@@ -53,10 +53,11 @@ public class BookingServiceImpl implements BookingService {
             throw new PermissionException("Booking can be approved only by an owner");
         }
 
+        if (booking4Update.getStatus() != BookingStatus.WAITING) {
+            throw new ValidationException("The booking is not in the waiting status");
+        }
+
         if (bookingUpdateStatusDto.getApproved()) {
-            if (booking4Update.getStatus().equals(BookingStatus.APPROVED)) {
-                throw new ValidationException("Booking was approved earlier");
-            }
             booking4Update.setStatus(BookingStatus.APPROVED);
         } else {
             booking4Update.setStatus(BookingStatus.REJECTED);

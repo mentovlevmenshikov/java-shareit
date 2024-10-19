@@ -155,7 +155,6 @@ public class ItemServiceImpl implements ItemService {
                 commentCreateDto.getAuthorId(), LocalDateTime.now(), BookingStatus.APPROVED)
                 .orElseThrow(() -> new ValidationException("Booking is not approved."));
         Comment comment = commentMapper.fromCommentCreateDto(commentCreateDto, booking.getBooker(), booking.getItem());
-        comment.setCreated(LocalDateTime.now());
         return commentMapper.fromCommentCreateDto(commentRepository.save(comment));
     }
 
