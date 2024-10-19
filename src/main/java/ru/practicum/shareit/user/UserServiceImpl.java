@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> getAllUsers() {
-        return userMapper.toUserDtos(userRepository.getAll());
+        return userMapper.toUserDtos(userRepository.findAll());
     }
 
     @Override
@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
     public UserDto createUser(UserCreateDto userCreateDto) {
         checkDuplicate(userCreateDto.getEmail());
         User user = userMapper.toUserFromUserCreateDto(userCreateDto);
-        return userMapper.toUserDto(userRepository.create(user));
+        return userMapper.toUserDto(userRepository.save(user));
     }
 
     @Override
@@ -47,16 +47,16 @@ public class UserServiceImpl implements UserService {
             checkDuplicate(userUpdateDto.getEmail());
             user4Update.setEmail(userUpdateDto.getEmail());
         }
-        return userMapper.toUserDto(userRepository.update(user4Update));
+        return userMapper.toUserDto(userRepository.save(user4Update));
     }
 
     @Override
     public void deleteUser(long id) {
-        userRepository.delete(id);
+        userRepository.deleteById(id);
     }
 
     private User findUserById(long id) {
-        return userRepository.getById(id)
+        return userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("User not found with id " + id));
     }
 
