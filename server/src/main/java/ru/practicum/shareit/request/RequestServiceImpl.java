@@ -6,7 +6,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.exception.NotFoundException;
-import ru.practicum.shareit.item.ItemRepository;
 import ru.practicum.shareit.request.dto.Request4ResponseDto;
 import ru.practicum.shareit.request.dto.RequestDto;
 import ru.practicum.shareit.user.UserRepository;

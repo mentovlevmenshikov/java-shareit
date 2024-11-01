@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureTestDatabase
 public class ItemRequestControllerTest {
 
-    private static final UserCreateDto VALID_USER = new UserCreateDto( null,"name", "email@mail.ru");
+    private static final UserCreateDto VALID_USER = new UserCreateDto(null,"name", "email@mail.ru");
     private static final UserCreateDto VALID_USER_2 = new UserCreateDto(null,"name 2", "email2@mail.ru");
     private static final ItemCreateDto VALID_ITEM = new ItemCreateDto("name", "description", true, null, 1L);
     private static final RequestDto VALID_REQUEST = new RequestDto("description", null);

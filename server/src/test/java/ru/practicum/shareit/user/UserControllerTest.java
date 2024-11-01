@@ -127,7 +127,8 @@ public class UserControllerTest {
         //when
         mockMvc.perform(
                         patch("/users/1")
-                                .content(objectMapper.writeValueAsString(new UserUpdateDto( "name_update", "email_update@mail.ru")))
+                                .content(objectMapper.writeValueAsString(new UserUpdateDto("name_update",
+                                        "email_update@mail.ru")))
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
 
@@ -147,7 +148,7 @@ public class UserControllerTest {
         //when
         mockMvc.perform(
                         patch("/users/1")
-                                .content(objectMapper.writeValueAsString(new UserUpdateDto( "name_update", null)))
+                                .content(objectMapper.writeValueAsString(new UserUpdateDto("name_update", null)))
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
 
@@ -225,7 +226,7 @@ public class UserControllerTest {
                 //then
                 .andExpect(status().isNotFound())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof NotFoundException))
-                .andExpect(result -> assertEquals( "User not found with id 8998",
+                .andExpect(result -> assertEquals("User not found with id 8998",
                         result.getResolvedException().getMessage()));
     }
 

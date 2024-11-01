@@ -85,8 +85,8 @@ public class UserServiceImplTest {
                 .when(mapper.toUserDto(genericUser))
                 .thenReturn(genericUserResponseDto);
 
-        Mockito.
-                when(mapper.toUserCreateDto(genericUser))
+        Mockito
+                .when(mapper.toUserCreateDto(genericUser))
                 .thenReturn(genericUserCreateDto);
 
         Mockito
