@@ -22,7 +22,6 @@ public class RequestServiceImpl {
     private final RequestRepository requestRepository;
     private final RequestMapper requestMapper;
     private final UserRepository userRepository;
-    private final ItemRepository itemRepository;
 
     @Transactional
     public Request4ResponseDto create(RequestDto requestDto, Long userId) {

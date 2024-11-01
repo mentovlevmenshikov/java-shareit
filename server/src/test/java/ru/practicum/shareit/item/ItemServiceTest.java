@@ -1,5 +1,6 @@
 package ru.practicum.shareit.item;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -7,12 +8,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.Sort;
 import ru.practicum.shareit.booking.Booking;
-import ru.practicum.shareit.booking.dto.BookingMapper;
 import ru.practicum.shareit.booking.BookingRepository;
-import ru.practicum.shareit.exception.NotFoundException;
+import ru.practicum.shareit.booking.dto.BookingMapper;
 import ru.practicum.shareit.item.comment.Comment;
+import ru.practicum.shareit.item.comment.CommentRepository;
 import ru.practicum.shareit.item.comment.dto.CommentDto;
 import ru.practicum.shareit.item.comment.dto.CommentMapper;
 import ru.practicum.shareit.item.dto.ItemCreateDto;
@@ -21,16 +21,16 @@ import ru.practicum.shareit.item.dto.ItemMapper;
 import ru.practicum.shareit.item.dto.ItemWithBookingDto;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.request.Request;
-import ru.practicum.shareit.user.User;
-import ru.practicum.shareit.user.dto.UserDto;
-import ru.practicum.shareit.user.UserRepository;
-import ru.practicum.shareit.item.comment.CommentRepository;
 import ru.practicum.shareit.request.RequestRepository;
+import ru.practicum.shareit.user.User;
+import ru.practicum.shareit.user.UserRepository;
+import ru.practicum.shareit.user.dto.UserDto;
 import ru.practicum.shareit.user.dto.UserMapper;
-import org.junit.jupiter.api.Assertions;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 public class ItemServiceTest {
@@ -39,7 +39,6 @@ public class ItemServiceTest {
     private final UserDto genericUserDto = new UserDto(1L, "name", "email@mail.ru");
     private Item genericItem;
     private ItemDto genericItemDto;
-    private ItemWithBookingDto genericItemWithBookingDto;
     private Request genericItemRequest;
     private Comment genericComment;
     private final CommentDto genericCommentResponseDto = new CommentDto(1L, "text", null, "name",
@@ -92,7 +91,7 @@ public class ItemServiceTest {
         genericItemDto = new ItemDto(1L, "name", "description", true,
                 genericUserDto.getId(), null);
 
-        genericItemWithBookingDto = new ItemWithBookingDto(1L, "name", "description", true,
+        ItemWithBookingDto genericItemWithBookingDto = new ItemWithBookingDto(1L, "name", "description", true,
                 null, null, null, null, null);
 
         genericItemRequest = new Request();
