@@ -28,7 +28,7 @@ public class ItemControllerTest {
 
     private static final UserCreateDto VALID_USER = new UserCreateDto(null, "name", "email@mail.ru");
     private static final UserCreateDto VALID_BOOKER = new UserCreateDto(null, "booker", "booker@mail.ru");
-    private static final ItemCreateDto VALID_ITEM = new ItemCreateDto("name", "description", true, null, null);
+    private static final ItemCreateDto VALID_ITEM = new ItemCreateDto("name", "description", true, 2L, null);
     private static final CommentCreateDto VALID_COMMENT = new CommentCreateDto("text", null, null);
     private static final String REQUEST_HEADER_USER_ID_TITLE = "X-Sharer-User-Id";
     private static final LocalDateTime START = LocalDateTime.now().plusMinutes(10);
@@ -420,6 +420,7 @@ public class ItemControllerTest {
         postValidUser(VALID_BOOKER);
         postValidItem(VALID_ITEM);
         postValidBooking(new BookingCreateDto(1L, LocalDateTime.now().plusSeconds(1), LocalDateTime.now().plusSeconds(2), null));
+        patchValidBooking();
         Thread.sleep(5000);
 
         //when
@@ -480,6 +481,15 @@ public class ItemControllerTest {
                 post("/bookings")
                         .header(REQUEST_HEADER_USER_ID_TITLE, 2)
                         .content(objectMapper.writeValueAsString(booking))
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+    }
+
+
+    private void patchValidBooking() throws Exception {
+        mockMvc.perform(
+                patch("/bookings/1?approved=true")
+                        .header(REQUEST_HEADER_USER_ID_TITLE, 1)
                         .contentType(MediaType.APPLICATION_JSON)
         );
     }

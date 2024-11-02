@@ -157,10 +157,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public CommentDto addComment(CommentCreateDto commentCreateDto) {
-
-        Booking booking = bookingRepository.findFirstByItem_IdAndBooker_IdAndEndIsBefore(commentCreateDto.getItemId(),
-                        commentCreateDto.getAuthorId(), LocalDateTime.now().plusSeconds(2))
-                .orElseThrow(() -> new ValidationException("Booking is not approved**."));
+        Booking booking = bookingRepository.findFirstByItem_IdAndBooker_IdAndEndIsBeforeAndStatus(commentCreateDto.getItemId(),
+                        commentCreateDto.getAuthorId(), LocalDateTime.now(), BookingStatus.APPROVED)
+                .orElseThrow(() -> new ValidationException("Booking is not approved."));
 
         Comment comment = commentMapper.fromCommentCreateDto(commentCreateDto, booking.getBooker(), booking.getItem());
         return commentMapper.fromCommentCreateDto(commentRepository.save(comment));
