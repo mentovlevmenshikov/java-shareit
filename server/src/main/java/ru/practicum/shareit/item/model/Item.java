@@ -25,7 +25,7 @@ public class Item {
     private boolean available;
     @ManyToOne(fetch = FetchType.LAZY)
     private User owner;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "request_id")
     private Request request;
 }

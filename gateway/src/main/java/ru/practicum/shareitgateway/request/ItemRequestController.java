@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareitgateway.logging.Logging;
 import ru.practicum.shareitgateway.request.dto.RequestDto;
@@ -11,7 +12,7 @@ import ru.practicum.shareitgateway.request.dto.RequestDto;
 import static ru.practicum.shareitgateway.consts.RequestHeader.HEADER4USER_ID;
 
 @Logging
-@RestController
+@Controller
 @RequestMapping(path = "/requests")
 @Slf4j
 @RequiredArgsConstructor

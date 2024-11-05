@@ -30,7 +30,6 @@ public class RequestMapper {
         requestForResponseDto.setId(request.getId());
         requestForResponseDto.setDescription(request.getDescription());
         requestForResponseDto.setCreated(request.getCreated());
-        requestForResponseDto.setItems(itemMapper.toItemDtoList(request.getItems()));
         return requestForResponseDto;
     }
 

@@ -6,11 +6,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import ru.practicum.shareit.item.model.Item;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -32,7 +29,7 @@ public class Request {
     private LocalDateTime created;
     @Column(name = "user_id", nullable = false)
     private Long userId;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    /*@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "request_id")
-    private List<Item> items = new ArrayList<>();
+    private List<Item> items = new ArrayList<>();*/
 }

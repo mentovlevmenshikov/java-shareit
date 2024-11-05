@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareitgateway.booking.dto.BookingCreateDto;
 import ru.practicum.shareitgateway.booking.dto.BookingUpdateStatusDto;
@@ -13,7 +14,7 @@ import static ru.practicum.shareitgateway.consts.RequestHeader.HEADER4USER_ID;
 
 @Logging
 @RequiredArgsConstructor
-@RestController
+@Controller
 @RequestMapping(path = "/bookings")
 public class BookingController {
 	private final BookingClient bookingClient;

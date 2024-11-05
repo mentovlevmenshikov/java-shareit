@@ -3,6 +3,7 @@ package ru.practicum.shareitgateway.user;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareitgateway.logging.Logging;
 import ru.practicum.shareitgateway.user.dto.UserCreateDto;
@@ -10,7 +11,7 @@ import ru.practicum.shareitgateway.user.dto.UserUpdateDto;
 
 @Logging
 @RequiredArgsConstructor
-@RestController
+@Controller
 @RequestMapping(path = "/users")
 public class UserController {
     private final UserClient userClient;
