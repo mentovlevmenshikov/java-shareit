@@ -40,7 +40,7 @@ public class RequestServiceImpl {
         Request request = requestMapper.toRequest(requestDto);
         request.setUserId(userId);
         Request newRequest = requestRepository.save(request);
-        List<Item> items = itemRepository.findAllByRequstIdIn(List.of(newRequest.getId()));
+        List<Item> items = itemRepository.findAllByRequest_IdIn(List.of(newRequest.getId()));
         Request4ResponseDto request4ResponseDto = requestMapper.request4ResponseDto(newRequest);
         request4ResponseDto.setItems(itemMapper.toItemDtoList(items));
         return requestMapper.request4ResponseDto(newRequest);
@@ -62,7 +62,7 @@ public class RequestServiceImpl {
     public Request4ResponseDto findById(long requestId) {
         Request request = requestRepository.findById(requestId)
                 .orElseThrow(() -> new NotFoundException("Request not found with id " + requestId));
-        List<Item> items = itemRepository.findAllByRequstIdIn(List.of(request.getId()));
+        List<Item> items = itemRepository.findAllByRequest_IdIn(List.of(request.getId()));
         Request4ResponseDto request4ResponseDto = requestMapper.request4ResponseDto(request);
         request4ResponseDto.setItems(itemMapper.toItemDtoList(items));
         return request4ResponseDto;
@@ -77,7 +77,7 @@ public class RequestServiceImpl {
                 .map(Request4ResponseDto::getId)
                 .collect(toList());
 
-        List<Item> items = itemRepository.findAllByRequstIdIn(requestsId);
+        List<Item> items = itemRepository.findAllByRequest_IdIn(requestsId);
 
         Map<Long, List<ItemDto>> map = new HashMap<>();
 
